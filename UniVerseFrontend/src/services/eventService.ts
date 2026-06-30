@@ -1,39 +1,39 @@
-import axios from "../axios/axios"
+import api from "../api/client"
 import GroupEvent from "../interfaces/GroupEvent";
 
 export const getEvents = async () : Promise<GroupEvent[]> =>{
-  const response = await axios.get('GroupEvent');
+  const response = await api.get('GroupEvent');
   return response.data;
 }
 
 export const getTrendingEvents = async () : Promise<GroupEvent[]> =>{
-  const response = await axios.get('GroupEvent/trending');
+  const response = await api.get('GroupEvent/trending');
   return response.data;
 }
 
 export const getIsAttending = async (eventId : number, username : string) => {
-  const response = await axios.get(`GroupEvent/${eventId}/is-attending/${username}`);
+  const response = await api.get(`GroupEvent/${eventId}/is-attending/${username}`);
   return response.data;
 }
 
 export const attendEvent = async ({eventId, username} : {eventId: number, username: string}) =>{
-  const response = await axios.post(`GroupEvent/${eventId}/attend/${username}`);
+  const response = await api.post(`GroupEvent/${eventId}/attend/${username}`);
   return response.data;
 }
 
 export const removeAttending = async ({eventId, username} : {eventId: number, username: string}) =>{
-  const response = await axios.post(`GroupEvent/${eventId}/remove-attending/${username}`);
+  const response = await api.post(`GroupEvent/${eventId}/remove-attending/${username}`);
   return response.data;
 }
 
 export const addEvent = async (event : GroupEvent) =>{
-  return await axios.post('GroupEvent/create-event', event);
+  return await api.post('GroupEvent/create-event', event);
 }
 
 export const updateEvent = async (event : GroupEvent) =>{
-  return await axios.patch(`GroupEvent/${event.id}`, event);
+  return await api.patch(`GroupEvent/${event.id}`, event);
 }
 
 export const deleteEvent = async (id : number) =>{
-  return await axios.delete(`GroupEvent/${id}`);
+  return await api.delete(`GroupEvent/${id}`);
 }

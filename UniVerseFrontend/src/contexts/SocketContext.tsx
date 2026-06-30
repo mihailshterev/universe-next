@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from "react"
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import Message from "../interfaces/Message";
-import axios from "../axios/axios";
+import api from "../api/client";
 import ChatInterface from "../interfaces/ChatInterface";
 import SocketContextType from "../interfaces/SocketContextType";
 import Notification from "../interfaces/Notification";
@@ -77,7 +77,7 @@ export const SocketProvider = ({ children } : SocketProviderProps) => {
         receiver: receiver
       };
 
-      await axios.post('Chat/send-private-message', chatMessage);
+      await api.post('Chat/send-private-message', chatMessage);
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -97,7 +97,7 @@ export const SocketProvider = ({ children } : SocketProviderProps) => {
         user1Name: chat.user1,
         user2Name: chat.user2
       }
-      await axios.post('Chat/create-chat', newChat);
+      await api.post('Chat/create-chat', newChat);
     } catch (error) {
       console.error('Error creating chat:', error);
     }
@@ -118,7 +118,7 @@ export const SocketProvider = ({ children } : SocketProviderProps) => {
         recipientName
       };
 
-      await axios.post('Notification/send-notification', notification);
+      await api.post('Notification/send-notification', notification);
     } catch (error) {
       console.error('Error sending notification:', error);
     }
@@ -139,7 +139,7 @@ export const SocketProvider = ({ children } : SocketProviderProps) => {
 
   const sendFriendRequest = async (friendRequest : {sender : string, receiver : string}) =>{
     try {
-      await axios.post('Friendship/send-friend-request', friendRequest);
+      await api.post('Friendship/send-friend-request', friendRequest);
     } catch (error) {
       console.error('Error sending friend request:', error);
     }
@@ -156,7 +156,7 @@ export const SocketProvider = ({ children } : SocketProviderProps) => {
 
   const sendIsOnlineAlert = async (username : string) =>{
     try {
-      await axios.post('Friendship/send-online-alert', {},
+      await api.post('Friendship/send-online-alert', {},
       {
         params: {username}
       });

@@ -1,4 +1,4 @@
-import axios from "../../axios/axios";
+import api from "../../api/client";
 import { useSocket } from "../useSocket";
 import useAuth from "./useAuth";
 
@@ -11,9 +11,7 @@ const useLogout = () =>{
 
     setAuth({}); 
     try{
-      await axios.post('Auth/logout',{},{
-        withCredentials: true
-      });
+      await api.post('Auth/logout', {});
     }catch(error){
       console.log(error);
     }

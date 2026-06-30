@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import axios from '../../axios/axios';
+import api from '../../api/client';
 import useAuth from '../../hooks/auth/useAuth';
 import ErrorFallback from '../fallback/ErrorFallback';
 import { z } from 'zod';
@@ -61,11 +61,10 @@ const AccessForm = () => {
         url = 'Auth/register';
       }
 
-      const response = await axios.post(url,
+      const response = await api.post(url,
         JSON.stringify(data),
         {
-          headers: {'Content-Type': 'application/json'},
-          withCredentials: true
+          headers: {'Content-Type': 'application/json'}
         }
       );
 
