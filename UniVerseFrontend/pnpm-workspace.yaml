@@ -1,0 +1,14 @@
+minimumReleaseAge: 10080
+blockExoticSubdeps: true
+
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 129600
+
+catalog:
+  esbuild: 0.28.1
+
+overrides:
+  esbuild: "catalog:"
+
+allowBuilds:
+  esbuild: true
